@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {Text, View, StyleSheet, TextInput} from 'react-native';
+import {Text, View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import db from '../config';
 import {Header} from 'react-native-elements';
 
 export default class ReadStory extends React.Component{
@@ -10,6 +11,13 @@ export default class ReadStory extends React.Component{
             author : '',
             story : ''
         }
+    }
+    submitStory = ()=>{
+        db.collection('Stories').add({
+            'title' : this.state.title,
+            'author' : this.state.author,
+            'story' : this.state.story
+        })
     }
     render(){
         return(
@@ -43,8 +51,27 @@ export default class ReadStory extends React.Component{
                             story : text
                         })
                     }}/>
+                    <TouchableOpacity style = {styles.button} onPress = {()=>{
+                        this.submitStory()
+                    }}><Text style = {styles.text}>Submit</Text></TouchableOpacity>
                 </View>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    inputBox : {
+        width : 300,
+        height : 50
+    },
+    button : {
+        width : 200,
+        height : 100,
+        backgroundColor : '#d1a3a4'
+    },
+    text : {
+        fontSize : 20,
+        color : 'maroon'
+    }
+})
