@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Text, View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import {Text, View, StyleSheet, TextInput, Alert, TouchableOpacity, KeyboardAvoidingView, Alert} from 'react-native';
 import db from '../config';
 import {Header} from 'react-native-elements';
 
@@ -18,10 +18,11 @@ export default class ReadStory extends React.Component{
             'author' : this.state.author,
             'story' : this.state.story
         })
+        return Alert.alert('Story Submitted Successfully');
     }
     render(){
         return(
-            <View style = {{flex : 0.1}}>
+            <KeyboardAvoidingView style = {{flex : 0.1}}>
 
                 <Header title = {"Write Story"} backgroundColor = "yellow" style = {{fontSize : 30, fontWeight : 'bold'}}/>
 
@@ -55,7 +56,7 @@ export default class ReadStory extends React.Component{
                         this.submitStory()
                     }}><Text style = {styles.text}>Submit</Text></TouchableOpacity>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
